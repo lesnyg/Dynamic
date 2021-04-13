@@ -8,8 +8,10 @@ public class Main {
         //monetary_composition()
         //gold_mine();
         //suger();
-        soldier_placement();
+        //soldier_placement();
+        one_maker();
     }
+
 
     private static void monetary_composition() {
         Scanner sc = new Scanner(System.in);
@@ -80,18 +82,7 @@ public class Main {
         }
     }
 
-    private static void suger() {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] dp = new int[n];
-        Arrays.fill(dp, 5001);
-        dp[0] = 0;
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j <= n; j++) {
 
-            }
-        }
-    }
 
     private static void soldier_placement() {
         Scanner sc = new Scanner(System.in);
@@ -119,12 +110,34 @@ public class Main {
 
         System.out.println(n - maxValue);
     }
-    
+    private static void suger() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int cnt = 0;
+        while(true){
+            if (n%5==0){
+                System.out.println(n/5+cnt);
+                break;
+            }else if(n<=0){
+                System.out.println(-1);
+                break;
+            }
+            n=n-3;
+            cnt++;
+        }
+    }
     private static void one_maker(){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        for (int i = 0; i < n; i++) {
-            
+        int[] dp = new int[n+1];
+        dp[0]=dp[1]=0;
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i-1]+1;
+            if(i%2==0) dp[i]=Math.min(dp[i],dp[i/2]+1);
+            if(i%3==0) dp[i]=Math.min(dp[i],dp[i/3]+1);
         }
+        System.out.println(dp[n]);
+
     }
+
 }
